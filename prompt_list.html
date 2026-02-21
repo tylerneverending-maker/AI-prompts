@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mb-4">AI Useful Prompts</h1>
+    <div class="list-group">
+        {% for prompt in prompts %}
+            <div class="list-group-item">
+                <h5 class="mb-1">{{ prompt.title }}</h5>
+                <p class="mb-1">{{ prompt.content }}</p>
+            </div>
+        {% empty %}
+            <div class="list-group-item">No prompts available.</div>
+        {% endfor %}
+    </div>
+{% endblock %}
