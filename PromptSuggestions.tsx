@@ -10,11 +10,16 @@ export const samplePrompts = [
 ];
 
 const PromptSuggestions: FC = () => {
-  const handlePromptClick = (prompt: string) => {
-    navigator.clipboard.writeText(prompt).then(() => {
-      // Optional: Add a toast notification here
-      console.log('Copied to clipboard:', prompt);
-    });
+  const handlePromptClick = async (prompt: string) => {
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(prompt);
+        // Optional: Add a toast notification here
+        console.log('Copied to clipboard:', prompt);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    }
   };
 
   return (
