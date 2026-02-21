@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import PromptItem from './PromptItem';
 
 export const samplePrompts = [
   'Explain this code and its functionality.',
@@ -9,19 +10,19 @@ export const samplePrompts = [
 ];
 
 const PromptSuggestions: FC = () => {
+  const handlePromptClick = (prompt: string) => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      // Optional: Add a toast notification here
+      console.log('Copied to clipboard:', prompt);
+    });
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">AI Useful Prompts</h1>
-      <ul className="list-disc pl-5 space-y-2">
-        {samplePrompts.map((prompt, index) => (
-          <li key={index} className="text-gray-700">
-            <button
-              onClick={() => console.log(prompt)}
-              className="text-left hover:text-blue-600 hover:underline"
-            >
-              {prompt}
-            </button>
-          </li>
+      <ul className="grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
+        {samplePrompts.map((prompt) => (
+          <PromptItem key={prompt} prompt={prompt} onClick={handlePromptClick} />
         ))}
       </ul>
     </div>
